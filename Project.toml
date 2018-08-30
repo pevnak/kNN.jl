@@ -1,0 +1,10 @@
+name = "kNN"
+uuid = "fa47a99c-a754-11e8-3c60-b99d25d7a586"
+authors = ["pevnak <pevnak@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+Distances = "b4f34e82-e78d-54a5-968a-f98e89d6e8f7"
+NearestNeighbors = "b8a86587-4115-5ab1-83bc-aa920d37bbce"
+SmoothingKernels = "ca758a80-a755-11e8-31a8-cbd1039df108"
+StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
