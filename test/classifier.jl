@@ -1,15 +1,15 @@
 module TestClassifier
-	using Base.Test
+	using Test
 	using kNN
-	using DataArrays
 	using DataFrames
     using RDatasets
     using Distances
     using StatsBase
+	using Statistics
 
     iris = dataset("datasets", "iris")
-    X = Array(iris[:, 1:4])'
-    y = Array(iris[:, 5])
+    X = collect(convert(Array, iris[1:4])')
+    y = convert(Array, iris[5])
     model = knn(X, y, metric = Euclidean())
 
     predict_k1 = predict(model, X, 1)

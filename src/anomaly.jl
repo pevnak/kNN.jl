@@ -1,11 +1,11 @@
 """
 
-    Implements all three variants of the anomaly detectors based on k-nearest neighbors from 
-    From outliers to prototypes: Ordering data, 
+    Implements all three variants of the anomaly detectors based on k-nearest neighbors from
+    From outliers to prototypes: Ordering data,
     Stefan Harmelinga and Guido Dornhegea and David Tax and Frank Meinecke and Klaus-Robert Muller, 2005
 
 """
-immutable KNNAnomaly{V<:Val}
+struct KNNAnomaly{V<:Val}
     t::BruteTree
     X::Matrix
     v::V
