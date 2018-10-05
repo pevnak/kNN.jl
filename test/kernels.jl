@@ -1,9 +1,8 @@
-@testset "TestKernels" begin
+using Test
+using kNN
+using QuadGK
 
-    using Test
-    using kNN
-    using QuadGK
-
+@testset "Kernels" begin
     ks = kNN.kernels
     for k in keys(ks)
         kernel = ks[k]

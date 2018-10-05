@@ -42,7 +42,7 @@ function StatsBase.predict!(ys::Vector, model::KernelRegression, xs::AbstractVec
 end
 
 function StatsBase.predict(model::KernelRegression, xs::AbstractVector{T}) where T <: Real
-    ys = Array{T}(length(xs))
+    ys = Array{T}(undef, length(xs))
     predict!(ys, model, xs)
     return ys
 end

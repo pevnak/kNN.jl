@@ -4,6 +4,7 @@ module kNN
     using StatsBase
     using Distances
     using NearestNeighbors
+    using Statistics
 
     include("kernels.jl")
     include("bandwidth.jl")

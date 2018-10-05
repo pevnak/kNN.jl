@@ -33,7 +33,7 @@ end
 function StatsBase.predict(model::kNNClassifier,
                            X::Matrix,
                            k::Integer = 1)
-    predictions = Array{eltype(model.y)}(size(X, 2))
+    predictions = Array{eltype(model.y)}(undef, size(X, 2))
     predict!(predictions, model, X, k)
     return predictions
 end

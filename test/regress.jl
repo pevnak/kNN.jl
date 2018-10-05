@@ -1,9 +1,11 @@
 module TestRegress
-	using Base.Test
+	using Test
 	using kNN
 	using StatsBase
+	using Statistics
+	using Random
 
-	srand(1)
+	Random.seed!(1)
 	n = 1_000
 	x = 10 * randn(n)
 	y = sin.(x) + 0.5 * randn(n)

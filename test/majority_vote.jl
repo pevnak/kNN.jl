@@ -1,7 +1,7 @@
-module TestMajorityVote
-	using Base.Test
-	using kNN
+using Test
+using kNN
 
+@testset "MajorityVote" begin
 	votes = ["A", "B", "B", "A", "C", "B"]
     @test isequal(kNN.majority_vote(votes), "B")
 
