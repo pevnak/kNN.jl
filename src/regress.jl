@@ -1,4 +1,4 @@
-immutable KernelRegression{R <: Union{Vector, Matrix}, T <: Real}
+struct KernelRegression{R <: Union{Vector, Matrix}, T <: Real}
     x::R
     y::Vector{T}
     k::Function
@@ -6,12 +6,7 @@ immutable KernelRegression{R <: Union{Vector, Matrix}, T <: Real}
 end
 
 # Want a version for x as a vector (this) and X as a matrix (doesn't exist yet)
-function kernelregression{R <: Any,
-                          T <: Real}(x::Vector{R},
-                                     y::Vector{T};
-                                     kernel::Symbol = :epanechnikov,
-                                     bandwidth::Real = NaN,
-                                     getbandwidth::Function = kNN.bandwidth)
+function kernelregression(x::Vector{R}, y::Vector{T}; kernel::Symbol = :epanechnikov, bandwidth::Real = NaN, getbandwidth::Function = kNN.bandwidth) where {R <: Any, T <: Real}
     if isnan(bandwidth)
         h_x = getbandwidth(x)
         h_y = getbandwidth(y)
@@ -19,7 +14,7 @@ function kernelregression{R <: Any,
     else
         h = bandwidth
     end
-    k = SmoothingKernels.kernels[kernel]
+    k = kernels[kernel]
     return KernelRegression(x, y, k, h)
 end
 
@@ -30,16 +25,14 @@ function StatsBase.predict(model::KernelRegression, x::Real)
     for i in 1:n
         # TODO: Get definitions and usage of bandwidth right
         # w_i = (1 / h) * k((x - model.x[i]) / h)
-        w_i = h * k(h * (x - model.x[i]))
+        w_i = h * k.(h * (x - model.x[i]))
         y += model.y[i] * w_i
         normalizer += w_i
     end
     return y / normalizer
 end
 
-function StatsBase.predict!{T <: Real}(ys::Vector,
-                                       model::KernelRegression,
-                                       xs::AbstractVector{T})
+function StatsBase.predict!(ys::Vector, model::KernelRegression, xs::AbstractVector{T}) where T <: Real
     n = length(xs)
     # @assert length(ys) == n
     for i in 1:n
@@ -48,8 +41,7 @@ function StatsBase.predict!{T <: Real}(ys::Vector,
     return
 end
 
-function StatsBase.predict{T <: Real}(model::KernelRegression,
-                                      xs::AbstractVector{T})
+function StatsBase.predict(model::KernelRegression, xs::AbstractVector{T}) where T <: Real
     ys = Array{T}(length(xs))
     predict!(ys, model, xs)
     return ys

@@ -4,8 +4,8 @@ module kNN
     using StatsBase
     using Distances
     using NearestNeighbors
-	using SmoothingKernels
 
+    include("kernels.jl")
     include("bandwidth.jl")
     include("majority_vote.jl")
     include("classifier.jl")
