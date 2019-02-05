@@ -5,7 +5,9 @@ module kNN
     using Distances
     using NearestNeighbors
 	using SmoothingKernels
-
+    using LinearAlgebra
+    using Statistics
+    
     include("bandwidth.jl")
     include("majority_vote.jl")
     include("classifier.jl")
