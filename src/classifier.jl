@@ -1,4 +1,4 @@
-immutable kNNClassifier
+struct kNNClassifier
     t::BruteTree
     y::Vector
 end
